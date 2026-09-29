@@ -1,17 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#fff7fa">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Sayang Eats">
+
+  <meta
+    name="theme-color"
+    content="#fff7fa"
+  >
+
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  >
+
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="default"
+  >
+
+  <meta
+    name="apple-mobile-web-app-title"
+    content="Sayang Eats"
+  >
 
   <title>Sayang Nak Makan Apa?</title>
 
+
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -30,6 +54,7 @@
       margin: auto;
       padding: 25px 18px 40px;
     }
+
 
     /* HEADER */
 
@@ -54,6 +79,7 @@
       font-size: 14px;
     }
 
+
     /* TITLE */
 
     .section-title {
@@ -61,6 +87,7 @@
       font-weight: 700;
       margin: 18px 0 12px;
     }
+
 
     /* FOOD GRID */
 
@@ -93,6 +120,7 @@
       font-size: 15px;
       font-weight: 650;
     }
+
 
     /* RESULT */
 
@@ -133,7 +161,8 @@
       cursor: pointer;
     }
 
-    /* MODAL BACKGROUND */
+
+    /* MODAL */
 
     .modal {
       display: none;
@@ -156,6 +185,7 @@
     .modal.show {
       display: flex;
     }
+
 
     /* MODAL BOX */
 
@@ -213,6 +243,7 @@
       margin-bottom: 20px;
     }
 
+
     /* INPUT */
 
     textarea {
@@ -239,6 +270,7 @@
       border-color: #292329;
     }
 
+
     /* MODAL BUTTONS */
 
     .modal-buttons {
@@ -251,7 +283,6 @@
 
     .cancel-btn,
     .confirm-btn {
-
       flex: 1;
 
       border: none;
@@ -277,6 +308,7 @@
       color: white;
     }
 
+
     /* FOOTER */
 
     .footer {
@@ -290,12 +322,15 @@
     }
 
   </style>
+
 </head>
 
 
 <body>
 
+
   <main class="app">
+
 
     <!-- HEADER -->
 
@@ -331,7 +366,9 @@
         onclick="openModal('🍗 Nasi Ayam', 'Contoh: nasi ayam, ayam crispy, kuah lebih')"
       >
 
-        <div class="emoji">🍗</div>
+        <div class="emoji">
+          🍗
+        </div>
 
         <div class="food-name">
           Nasi Ayam
@@ -345,7 +382,9 @@
         onclick="openModal('🍳 Nasi Goreng', 'Contoh: nasi goreng ayam, kurang pedas')"
       >
 
-        <div class="emoji">🍳</div>
+        <div class="emoji">
+          🍳
+        </div>
 
         <div class="food-name">
           Nasi Goreng
@@ -359,7 +398,9 @@
         onclick="openModal('🍜 Maggi Goreng', 'Contoh: maggi goreng ayam, telur mata')"
       >
 
-        <div class="emoji">🍜</div>
+        <div class="emoji">
+          🍜
+        </div>
 
         <div class="food-name">
           Maggi Goreng
@@ -373,7 +414,9 @@
         onclick="openModal('🍲 Tomyam', 'Contoh: tomyam ayam, tak nak cendawan')"
       >
 
-        <div class="emoji">🍲</div>
+        <div class="emoji">
+          🍲
+        </div>
 
         <div class="food-name">
           Tomyam
@@ -387,7 +430,9 @@
         onclick="openModal('🍔 McDonald’s', 'Contoh: McChicken, fries, Coke')"
       >
 
-        <div class="emoji">🍔</div>
+        <div class="emoji">
+          🍔
+        </div>
 
         <div class="food-name">
           McDonald's
@@ -401,7 +446,9 @@
         onclick="openModal('🍕 Pizza', 'Contoh: chicken pepperoni, extra cheese')"
       >
 
-        <div class="emoji">🍕</div>
+        <div class="emoji">
+          🍕
+        </div>
 
         <div class="food-name">
           Pizza
@@ -415,7 +462,9 @@
         onclick="openModal('🍗 KFC', 'Contoh: 2pcs chicken, fries, Coke')"
       >
 
-        <div class="emoji">🍗</div>
+        <div class="emoji">
+          🍗
+        </div>
 
         <div class="food-name">
           KFC
@@ -429,7 +478,9 @@
         onclick="openModal('🍝 Spaghetti', 'Contoh: spaghetti bolognese, extra cheese')"
       >
 
-        <div class="emoji">🍝</div>
+        <div class="emoji">
+          🍝
+        </div>
 
         <div class="food-name">
           Spaghetti
@@ -443,7 +494,9 @@
         onclick="openModal('🥤 Minuman', 'Contoh: Milo ais kurang manis')"
       >
 
-        <div class="emoji">🥤</div>
+        <div class="emoji">
+          🥤
+        </div>
 
         <div class="food-name">
           Minuman
@@ -457,23 +510,31 @@
         onclick="openModal('🍰 Dessert', 'Contoh: chocolate cake, tak nak terlalu manis')"
       >
 
-        <div class="emoji">🍰</div>
+        <div class="emoji">
+          🍰
+        </div>
 
         <div class="food-name">
           Dessert
         </div>
 
       </button>
-      <button
-  class="food"
-  onclick="openModal('🤷‍♀️ Tak tahu nak makan apa', 'Contoh: abang pilihkan untuk saya')"
->
-  <div class="emoji">🤷‍♀️</div>
 
-  <div class="food-name">
-    Tak tahu nak makan apa
-  </div>
-</button>
+
+      <button
+        class="food"
+        onclick="openModal('🤷‍♀️ Tak tahu nak makan apa', 'Contoh: abang pilihkan untuk saya')"
+      >
+
+        <div class="emoji">
+          🤷‍♀️
+        </div>
+
+        <div class="food-name">
+          Tak tahu nak makan apa
+        </div>
+
+      </button>
 
 
     </div>
@@ -508,6 +569,7 @@
     <div class="footer">
       Made with ❤️
     </div>
+
 
   </main>
 
@@ -571,6 +633,8 @@
   </div>
 
 
+  <!-- MAIN JAVASCRIPT -->
+
   <script>
 
     let selectedMenu = "";
@@ -620,8 +684,8 @@
 
       const specification =
         document.getElementById("foodSpecification")
-        .value
-        .trim();
+          .value
+          .trim();
 
 
       let finalChoice;
@@ -650,19 +714,33 @@
         .classList.add("show");
 
 
-      // SAVE
+      // SAVE LOCALLY
 
       localStorage.setItem(
         "selectedFood",
         finalChoice
       );
-      sendFoodChoice(finalChoice);
+
+
+      // SEND TO FIREBASE
+
+      if (typeof window.sendFoodChoice === "function") {
+
+        window.sendFoodChoice(finalChoice);
+
+      } else {
+
+        console.error(
+          "Firebase function is not ready."
+        );
+
+      }
 
 
       closeModal();
 
 
-      // Scroll to result
+      // SCROLL TO RESULT
 
       setTimeout(function() {
 
@@ -723,47 +801,137 @@
       });
 
   </script>
+
+
+  <!-- SERVICE WORKER -->
+
   <script>
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-      navigator.serviceWorker.register("./sw.js")
-        .then(() => console.log("App ready"))
-        .catch(error => console.log("Service Worker error:", error));
-    });
-  }
-</script>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-  import {
-    getFirestore,
-    collection,
-    addDoc,
-    serverTimestamp
-  } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
-  const firebaseConfig = {
-    apiKey: "AIzaSyDSFvZ3JtqTB7HP85WyRa5dka9VRUJdKDU",
-    authDomain: "baby-7eec4.firebaseapp.com",
-    projectId: "baby-7eec4",
-    storageBucket: "baby-7eec4.firebasestorage.app",
-    messagingSenderId: "824621868036",
-    appId: "1:824621868036:web:870a7c66e9311fb77ec151"
-  };
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+    if ("serviceWorker" in navigator) {
 
-  window.sendFoodChoice = async function(food) {
-    try {
-      await addDoc(collection(db, "foodChoices"), {
-        food: food,
-        createdAt: serverTimestamp()
+      window.addEventListener("load", () => {
+
+        navigator.serviceWorker
+          .register("./sw.js")
+
+          .then(() => {
+
+            console.log("✅ App ready");
+
+          })
+
+          .catch(error => {
+
+            console.error(
+              "❌ Service Worker error:",
+              error
+            );
+
+          });
+
       });
 
-      console.log("Food choice sent:", food);
-    } catch (error) {
-      console.error("Failed to send food choice:", error);
     }
-  };
-</script>
+
+  </script>
+
+
+  <!-- FIREBASE REALTIME DATABASE -->
+
+  <script type="module">
+
+    import {
+      initializeApp
+    }
+    from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+
+    import {
+      getDatabase,
+      ref,
+      push,
+      serverTimestamp
+    }
+    from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+
+
+    const firebaseConfig = {
+
+      apiKey:
+        "AIzaSyDSFvZ3JtqTB7HP85WyRa5dka9VRUJdKDU",
+
+      authDomain:
+        "baby-7eec4.firebaseapp.com",
+
+      databaseURL:
+        "https://baby-7eec4-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+      projectId:
+        "baby-7eec4",
+
+      storageBucket:
+        "baby-7eec4.firebasestorage.app",
+
+      messagingSenderId:
+        "824621868036",
+
+      appId:
+        "1:824621868036:web:870a7c66e9311fb77ec151"
+
+    };
+
+
+    // INITIALIZE FIREBASE
+
+    const app =
+      initializeApp(firebaseConfig);
+
+
+    const db =
+      getDatabase(app);
+
+
+    // SEND FOOD CHOICE
+
+    window.sendFoodChoice =
+      async function(food) {
+
+        try {
+
+          await push(
+            ref(db, "foodChoices"),
+            {
+              food: food,
+              timestamp: serverTimestamp()
+            }
+          );
+
+
+          console.log(
+            "✅ Food choice sent:",
+            food
+          );
+
+
+        } catch (error) {
+
+          console.error(
+            "❌ Failed to send food choice:",
+            error
+          );
+
+        }
+
+      };
+
+
+    console.log(
+      "🔥 Firebase connected"
+    );
+
+  </script>
+
+
 </body>
+
 </html>
