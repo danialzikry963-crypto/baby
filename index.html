@@ -1,297 +1,876 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <meta name="theme-color" content="#fff7fa">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
   <link rel="manifest" href="manifest.json">
 
-  <meta
-    name="theme-color"
-    content="#fff7fa"
-  >
-
-  <meta
-    name="apple-mobile-web-app-capable"
-    content="yes"
-  >
-
-  <meta
-    name="apple-mobile-web-app-status-bar-style"
-    content="default"
-  >
-
-  <meta
-    name="apple-mobile-web-app-title"
-    content="Sayang Eats"
-  >
-
-  <title>Sayang Nak Makan Apa?</title>
-
+  <title>Sayang Space ❤️</title>
 
   <style>
 
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
+      margin: 0;
       background: #fff7fa;
       color: #292329;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      transition:
+        background 0.3s,
+        color 0.3s;
     }
 
-    .app {
-      max-width: 430px;
-      min-height: 100vh;
-      margin: auto;
-      padding: 25px 18px 40px;
+    button,
+    textarea,
+    input {
+      font-family: inherit;
     }
 
+    /* =========================
+       DARK MODE
+    ========================= */
 
-    /* HEADER */
-
-    .header {
-      text-align: center;
-      padding: 20px 0 25px;
+    body.dark {
+      background: #171317;
+      color: #f8eef3;
     }
 
-    .heart {
-      font-size: 42px;
-      margin-bottom: 8px;
+    body.dark .quote-card,
+    body.dark .photo-card,
+    body.dark .menu-card,
+    body.dark .food-btn,
+    body.dark .food-result,
+    body.dark .emotion-btn,
+    body.dark .emotion-show,
+    body.dark .feel-card,
+    body.dark .settings-card,
+    body.dark .modal-box,
+    body.dark .back-btn {
+      background: #241e24;
+      color: #f8eef3;
     }
 
-    h1 {
-      font-size: 27px;
-      font-weight: 750;
+    body.dark .subtitle,
+    body.dark .page-subtitle,
+    body.dark .small,
+    body.dark .status,
+    body.dark .greeting {
+      color: #bdaeb6;
     }
 
-    .subtitle {
-      margin-top: 7px;
-      color: #8b7b83;
-      font-size: 14px;
-    }
-
-
-    /* TITLE */
-
-    .section-title {
-      font-size: 18px;
-      font-weight: 700;
-      margin: 18px 0 12px;
-    }
-
-
-    /* FOOD GRID */
-
-    .food-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .food {
-      background: white;
-      border: none;
-      border-radius: 20px;
-      padding: 18px 12px;
-      box-shadow: 0 5px 18px rgba(80, 30, 50, 0.08);
-      cursor: pointer;
-      transition: 0.15s;
-    }
-
-    .food:active {
-      transform: scale(0.94);
-    }
-
-    .emoji {
-      font-size: 38px;
-      margin-bottom: 8px;
-    }
-
-    .food-name {
-      font-size: 15px;
-      font-weight: 650;
-    }
-
-
-    /* RESULT */
-
-    .result {
-      display: none;
-      margin-top: 22px;
-      background: #292329;
+    body.dark textarea,
+    body.dark input {
+      background: #1c181c;
       color: white;
-      border-radius: 22px;
-      padding: 20px;
-      text-align: center;
+      border-color: #453a43;
     }
 
-    .result.show {
+    body.dark .setting-row {
+      border-color: #40353d;
+    }
+
+    body.dark .bottom-nav {
+      background:
+        rgba(36,30,36,0.94);
+    }
+
+    body.dark .nav-btn.active {
+      background: #3b3038;
+      color: white;
+    }
+
+    body.dark .clear-btn {
+      background: #3b3038;
+      color: white;
+    }
+
+    /* =========================
+       PAGE
+    ========================= */
+
+    .page {
+      display: none;
+      min-height: 100vh;
+
+      padding:
+        25px
+        18px
+        95px;
+    }
+
+    .page.active {
       display: block;
     }
 
-    .result-small {
+    .container {
+      width: 100%;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    /* =========================
+       HOME
+    ========================= */
+
+    .home {
+      text-align: center;
+      padding-top: 18px;
+    }
+
+    .heart-logo {
+      font-size: 38px;
+
+      animation:
+        heartbeat 1.8s infinite;
+    }
+
+    @keyframes heartbeat {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.12);
+      }
+
+    }
+
+    .home h1 {
+      font-size: 30px;
+      margin: 5px 0;
+    }
+
+    .subtitle {
+      color: #927f89;
+      font-size: 14px;
+      margin-bottom: 22px;
+    }
+
+    /* =========================
+       PHOTO
+    ========================= */
+
+    .photo-card {
+      background: white;
+
+      padding:
+        10px
+        10px
+        20px;
+
+      border-radius: 22px;
+
+      box-shadow:
+        0 12px 35px
+        rgba(80, 40, 60, 0.13);
+
+      transform: rotate(-1deg);
+
+      margin-bottom: 25px;
+    }
+
+    .photo-card img {
+      width: 100%;
+
+      aspect-ratio: 4 / 3;
+
+      object-fit: cover;
+
+      border-radius: 15px;
+
+      display: block;
+    }
+
+    .photo-caption {
+      margin-top: 12px;
+
+      color: #81717a;
+
       font-size: 13px;
-      opacity: 0.7;
+    }
+
+    /* =========================
+       GREETING
+    ========================= */
+
+    .greeting {
+      font-size: 14px;
+
+      color: #9b8791;
+
       margin-bottom: 8px;
     }
 
-    .result-food {
-      font-size: 20px;
-      font-weight: 750;
-      line-height: 1.4;
+    /* =========================
+       QUOTE
+    ========================= */
+
+    .quote-card {
+      background: white;
+
+      padding: 21px;
+
+      border-radius: 21px;
+
+      margin-bottom: 25px;
+
+      box-shadow:
+        0 8px 25px
+        rgba(80, 40, 60, 0.08);
     }
 
-    .reset {
-      margin-top: 14px;
+    .quote {
+      font-size: 17px;
+
+      line-height: 1.6;
+
+      font-weight: 650;
+    }
+
+    .small {
+      margin-top: 10px;
+
+      font-size: 13px;
+
+      color: #95838c;
+    }
+
+    /* =========================
+       HOME MENU
+    ========================= */
+
+    .menu-title {
+      font-size: 15px;
+
+      font-weight: 700;
+
+      margin-bottom: 12px;
+    }
+
+    .menu-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 12px;
+    }
+
+    .menu-card {
       border: none;
+
       background: white;
+
+      padding: 20px 10px;
+
+      border-radius: 20px;
+
+      box-shadow:
+        0 7px 22px
+        rgba(80, 40, 60, 0.08);
+
+      cursor: pointer;
+
+      transition:
+        transform 0.2s;
+    }
+
+    .menu-card:active {
+      transform: scale(0.94);
+    }
+
+    .menu-icon {
+      font-size: 34px;
+
+      margin-bottom: 8px;
+    }
+
+    .menu-name {
+      font-size: 13px;
+
+      font-weight: 700;
+    }
+
+    /* =========================
+       BOTTOM NAV
+    ========================= */
+
+    .bottom-nav {
+      position: fixed;
+
+      left: 50%;
+      bottom: 12px;
+
+      transform:
+        translateX(-50%);
+
+      width:
+        calc(100% - 28px);
+
+      max-width: 470px;
+
+      background:
+        rgba(255,255,255,0.94);
+
+      backdrop-filter:
+        blur(15px);
+
+      -webkit-backdrop-filter:
+        blur(15px);
+
+      border-radius: 22px;
+
+      padding: 8px;
+
+      display: flex;
+
+      justify-content:
+        space-around;
+
+      box-shadow:
+        0 8px 30px
+        rgba(60, 30, 50, 0.14);
+
+      z-index: 90;
+    }
+
+    .nav-btn {
+      border: none;
+
+      background: transparent;
+
+      padding:
+        7px
+        10px;
+
+      border-radius: 15px;
+
+      cursor: pointer;
+
+      color: #8e7b85;
+
+      font-size: 11px;
+    }
+
+    .nav-icon {
+      display: block;
+
+      font-size: 21px;
+
+      margin-bottom: 2px;
+    }
+
+    .nav-btn.active {
+      background: #f7e7ed;
+
       color: #292329;
-      padding: 10px 18px;
-      border-radius: 999px;
-      font-weight: 600;
+    }
+
+    /* =========================
+       PAGE HEADER
+    ========================= */
+
+    .back-btn {
+      border: none;
+
+      background: white;
+
+      padding:
+        10px
+        15px;
+
+      border-radius: 14px;
+
+      box-shadow:
+        0 5px 16px
+        rgba(80, 40, 60, 0.08);
+
+      cursor: pointer;
+
+      margin-bottom: 18px;
+    }
+
+    .page-title {
+      text-align: center;
+
+      font-size: 27px;
+
+      margin:
+        4px
+        0
+        7px;
+    }
+
+    .page-subtitle {
+      text-align: center;
+
+      color: #927f89;
+
+      font-size: 14px;
+
+      margin-bottom: 25px;
+    }
+
+    /* =========================
+       FOOD
+    ========================= */
+
+    .food-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 11px;
+    }
+
+    .food-btn {
+      border: none;
+
+      background: white;
+
+      padding: 18px 8px;
+
+      border-radius: 18px;
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 7px 20px
+        rgba(80, 40, 60, 0.08);
+    }
+
+    .food-btn:active {
+      transform: scale(0.95);
+    }
+
+    .random-food {
+      width: 100%;
+
+      border: none;
+
+      background: #292329;
+
+      color: white;
+
+      padding: 15px;
+
+      border-radius: 17px;
+
+      margin-top: 14px;
+
+      font-size: 15px;
+
+      font-weight: 700;
+
       cursor: pointer;
     }
 
+    .food-result {
+      display: none;
 
-    /* MODAL */
+      background: white;
+
+      margin-top: 20px;
+
+      padding: 20px;
+
+      border-radius: 20px;
+
+      text-align: center;
+
+      box-shadow:
+        0 8px 25px
+        rgba(80,40,60,0.08);
+
+      animation:
+        pop 0.35s ease;
+    }
+
+    .food-result h3 {
+      margin-top: 0;
+    }
+
+    /* =========================
+       EMOTION
+    ========================= */
+
+    .emotion-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 10px;
+    }
+
+    .emotion-btn {
+      border: none;
+
+      background: white;
+
+      border-radius: 18px;
+
+      padding:
+        15px 5px;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 7px 18px
+        rgba(80,40,60,0.08);
+
+      transition: 0.2s;
+    }
+
+    .emotion-btn:active {
+      transform: scale(0.93);
+    }
+
+    .emotion-icon {
+      font-size: 30px;
+    }
+
+    .emotion-name {
+      font-size: 11px;
+
+      margin-top: 6px;
+
+      font-weight: 600;
+    }
+
+    .emotion-show {
+      display: none;
+
+      background: white;
+
+      padding:
+        25px 15px;
+
+      border-radius: 20px;
+
+      margin-top: 20px;
+
+      text-align: center;
+
+      box-shadow:
+        0 8px 25px
+        rgba(80,40,60,0.1);
+    }
+
+    .emotion-show.active {
+      display: block;
+
+      animation:
+        pop 0.4s ease;
+    }
+
+    .big-emotion {
+      font-size: 58px;
+    }
+
+    .emotion-message {
+      font-size: 16px;
+
+      font-weight: 600;
+
+      line-height: 1.5;
+
+      margin-top: 10px;
+    }
+
+    /* =========================
+       MELUAH
+    ========================= */
+
+    .feel-card {
+      background: white;
+
+      padding: 20px;
+
+      border-radius: 21px;
+
+      box-shadow:
+        0 8px 25px
+        rgba(80,40,60,0.08);
+    }
+
+    textarea {
+      width: 100%;
+
+      min-height: 190px;
+
+      resize: none;
+
+      padding: 15px;
+
+      border:
+        1px solid #eadde4;
+
+      border-radius: 15px;
+
+      outline: none;
+
+      background: #fffafb;
+
+      font-size: 15px;
+
+      line-height: 1.5;
+    }
+
+    .send-btn {
+      width: 100%;
+
+      border: none;
+
+      background: #292329;
+
+      color: white;
+
+      padding: 14px;
+
+      border-radius: 15px;
+
+      margin-top: 12px;
+
+      font-size: 15px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+
+    .status {
+      text-align: center;
+
+      color: #927f89;
+
+      font-size: 13px;
+
+      margin-top: 12px;
+    }
+
+    /* =========================
+       SETTINGS
+    ========================= */
+
+    .settings-card {
+      background: white;
+
+      padding:
+        5px 18px;
+
+      border-radius: 20px;
+
+      box-shadow:
+        0 8px 24px
+        rgba(80,40,60,0.08);
+    }
+
+    .setting-row {
+      display: flex;
+
+      align-items: center;
+
+      justify-content:
+        space-between;
+
+      padding: 17px 0;
+
+      border-bottom:
+        1px solid #eee5e9;
+    }
+
+    .setting-row:last-child {
+      border-bottom: none;
+    }
+
+    .setting-left {
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+    }
+
+    .setting-icon {
+      font-size: 23px;
+    }
+
+    .setting-text {
+      font-size: 14px;
+
+      font-weight: 600;
+    }
+
+    .toggle {
+      width: 48px;
+
+      height: 27px;
+
+      border-radius: 20px;
+
+      background: #ddd;
+
+      border: none;
+
+      position: relative;
+
+      cursor: pointer;
+    }
+
+    .toggle::after {
+      content: "";
+
+      width: 21px;
+
+      height: 21px;
+
+      background: white;
+
+      border-radius: 50%;
+
+      position: absolute;
+
+      top: 3px;
+
+      left: 4px;
+
+      transition: 0.25s;
+    }
+
+    .toggle.on {
+      background: #292329;
+    }
+
+    .toggle.on::after {
+      transform:
+        translateX(19px);
+    }
+
+    .clear-btn {
+      border: none;
+
+      background: #f4e8ed;
+
+      color: #292329;
+
+      padding:
+        9px 12px;
+
+      border-radius: 10px;
+
+      cursor: pointer;
+
+      font-size: 12px;
+
+      font-weight: 600;
+    }
+
+    /* =========================
+       MODAL
+    ========================= */
 
     .modal {
       display: none;
 
       position: fixed;
-      z-index: 1000;
 
-      left: 0;
-      top: 0;
+      inset: 0;
 
-      width: 100%;
-      height: 100%;
+      background:
+        rgba(0,0,0,0.38);
 
-      background: rgba(0, 0, 0, 0.45);
+      align-items: center;
 
-      align-items: flex-end;
       justify-content: center;
+
+      padding: 20px;
+
+      z-index: 200;
     }
 
-    .modal.show {
+    .modal.active {
       display: flex;
     }
 
-
-    /* MODAL BOX */
-
     .modal-box {
       width: 100%;
-      max-width: 430px;
+
+      max-width: 400px;
 
       background: white;
 
-      border-radius: 28px 28px 0 0;
+      border-radius: 22px;
 
-      padding: 25px 20px 30px;
+      padding: 22px;
 
-      animation: slideUp 0.25s ease;
+      animation:
+        pop 0.25s ease;
     }
 
-    @keyframes slideUp {
-
-      from {
-        transform: translateY(100%);
-      }
-
-      to {
-        transform: translateY(0);
-      }
-
+    .modal-box h2 {
+      margin-top: 0;
     }
 
-    .modal-handle {
-      width: 45px;
-      height: 5px;
-
-      background: #ddd;
-
-      border-radius: 20px;
-
-      margin: 0 auto 20px;
-    }
-
-    .modal-title {
-      text-align: center;
-      font-size: 21px;
-      font-weight: 750;
-
-      margin-bottom: 6px;
-    }
-
-    .modal-subtitle {
-      text-align: center;
-
-      color: #8b7b83;
-
-      font-size: 13px;
-
-      margin-bottom: 20px;
-    }
-
-
-    /* INPUT */
-
-    textarea {
+    .modal-box input {
       width: 100%;
 
-      min-height: 110px;
+      padding: 13px;
 
-      border: 1px solid #e5dfe2;
+      border:
+        1px solid #eadde4;
 
-      border-radius: 16px;
-
-      padding: 15px;
-
-      resize: none;
-
-      font-size: 15px;
+      border-radius: 12px;
 
       outline: none;
 
-      background: #faf8f9;
+      font-size: 15px;
     }
-
-    textarea:focus {
-      border-color: #292329;
-    }
-
-
-    /* MODAL BUTTONS */
 
     .modal-buttons {
       display: flex;
 
       gap: 10px;
 
-      margin-top: 14px;
+      margin-top: 12px;
     }
 
-    .cancel-btn,
-    .confirm-btn {
+    .modal-buttons button {
       flex: 1;
 
       border: none;
 
-      padding: 14px;
+      padding: 13px;
 
-      border-radius: 15px;
-
-      font-size: 15px;
+      border-radius: 12px;
 
       font-weight: 700;
 
@@ -299,329 +878,794 @@
     }
 
     .cancel-btn {
-      background: #f1edef;
-      color: #292329;
+      background: #f2edf0;
     }
 
     .confirm-btn {
       background: #292329;
+
       color: white;
     }
 
+    /* =========================
+       ANIMATIONS
+    ========================= */
 
-    /* FOOTER */
+    @keyframes pop {
 
-    .footer {
-      text-align: center;
+      from {
+        opacity: 0;
+        transform: scale(0.85);
+      }
 
-      margin-top: 30px;
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
 
-      color: #a08f97;
+    }
 
-      font-size: 12px;
+    .float-heart {
+      position: fixed;
+
+      bottom: -30px;
+
+      font-size: 17px;
+
+      pointer-events: none;
+
+      animation:
+        floatUp 4s linear forwards;
+
+      z-index: 10;
+    }
+
+    @keyframes floatUp {
+
+      0% {
+        opacity: 0;
+
+        transform:
+          translateY(0)
+          scale(0.7);
+      }
+
+      15% {
+        opacity: 0.7;
+      }
+
+      100% {
+        opacity: 0;
+
+        transform:
+          translateY(-100vh)
+          scale(1.2);
+      }
+
+    }
+
+    @media (max-width: 380px) {
+
+      .emotion-grid {
+        gap: 7px;
+      }
+
+      .nav-btn {
+        padding:
+          7px 7px;
+      }
+
     }
 
   </style>
-
 </head>
 
 
 <body>
 
 
-  <main class="app">
+<!-- =====================================================
+     HOME PAGE
+====================================================== -->
 
+<section
+  id="homePage"
+  class="page active">
 
-    <!-- HEADER -->
+  <div class="container home">
 
-    <header class="header">
 
-      <div class="heart">
-        ❤️
-      </div>
-
-      <h1>
-        What does Sayang want?
-      </h1>
-
-      <p class="subtitle">
-        Pick something you feel like eating today.
-      </p>
-
-    </header>
-
-
-    <!-- FOOD -->
-
-    <h2 class="section-title">
-      🍽️ Choose your food
-    </h2>
-
-
-    <div class="food-list">
-
-
-      <button
-        class="food"
-        onclick="openModal('🍗 Nasi Ayam', 'Contoh: nasi ayam, ayam crispy, kuah lebih')"
-      >
-
-        <div class="emoji">
-          🍗
-        </div>
-
-        <div class="food-name">
-          Nasi Ayam
-        </div>
-
-      </button>
-
-
-      <button
-        class="food"
-        onclick="openModal('🍳 Nasi Goreng', 'Contoh: nasi goreng ayam, kurang pedas')"
-      >
-
-        <div class="emoji">
-          🍳
-        </div>
-
-        <div class="food-name">
-          Nasi Goreng
-        </div>
-
-      </button>
-
-
-      <button
-        class="food"
-        onclick="openModal('🍜 Maggi Goreng', 'Contoh: maggi goreng ayam, telur mata')"
-      >
-
-        <div class="emoji">
-          🍜
-        </div>
-
-        <div class="food-name">
-          Maggi Goreng
-        </div>
-
-      </button>
-
-
-      <button
-        class="food"
-        onclick="openModal('🍲 Tomyam', 'Contoh: tomyam ayam, tak nak cendawan')"
-      >
-
-        <div class="emoji">
-          🍲
-        </div>
-
-        <div class="food-name">
-          Tomyam
-        </div>
-
-      </button>
-
-
-      <button
-        class="food"
-        onclick="openModal('🍔 McDonald’s', 'Contoh: McChicken, fries, Coke')"
-      >
-
-        <div class="emoji">
-          🍔
-        </div>
-
-        <div class="food-name">
-          McDonald's
-        </div>
-
-      </button>
-
-
-      <button
-        class="food"
-        onclick="openModal('🍕 Pizza', 'Contoh: chicken pepperoni, extra cheese')"
-      >
-
-        <div class="emoji">
-          🍕
-        </div>
-
-        <div class="food-name">
-          Pizza
-        </div>
-
-      </button>
-
-
-      <button
-        class="food"
-        onclick="openModal('🍗 KFC', 'Contoh: 2pcs chicken, fries, Coke')"
-      >
-
-        <div class="emoji">
-          🍗
-        </div>
-
-        <div class="food-name">
-          KFC
-        </div>
-
-      </button>
-
-
-      <button
-        class="food"
-        onclick="openModal('🍝 Spaghetti', 'Contoh: spaghetti bolognese, extra cheese')"
-      >
-
-        <div class="emoji">
-          🍝
-        </div>
-
-        <div class="food-name">
-          Spaghetti
-        </div>
-
-      </button>
-
-
-      <button
-        class="food"
-        onclick="openModal('🥤 Minuman', 'Contoh: Milo ais kurang manis')"
-      >
-
-        <div class="emoji">
-          🥤
-        </div>
-
-        <div class="food-name">
-          Minuman
-        </div>
-
-      </button>
-
-
-      <button
-        class="food"
-        onclick="openModal('🍰 Dessert', 'Contoh: chocolate cake, tak nak terlalu manis')"
-      >
-
-        <div class="emoji">
-          🍰
-        </div>
-
-        <div class="food-name">
-          Dessert
-        </div>
-
-      </button>
-
-
-      <button
-        class="food"
-        onclick="openModal('🤷‍♀️ Tak tahu nak makan apa', 'Contoh: abang pilihkan untuk saya')"
-      >
-
-        <div class="emoji">
-          🤷‍♀️
-        </div>
-
-        <div class="food-name">
-          Tak tahu nak makan apa
-        </div>
-
-      </button>
-
-
+    <div class="heart-logo">
+      ❤️
     </div>
 
 
-    <!-- RESULT -->
+    <h1>
+      Sayang Space
+    </h1>
+
+
+    <div class="subtitle">
+      A little place just for you 🤍
+    </div>
+
+
+    <!-- GREETING -->
 
     <div
-      id="result"
-      class="result"
-    >
+      id="greeting"
+      class="greeting">
 
-      <div class="result-small">
-        ❤️ Sayang pilih...
+      Good day 🤍
+
+    </div>
+
+
+    <!-- PHOTO -->
+
+    <div class="photo-card">
+
+      <!--
+        LETAK GAMBAR KAU + DIA DI:
+
+        images/couple.jpg
+
+        Kalau nama gambar lain,
+        tukar "couple.jpg" dekat bawah.
+      -->
+
+      <img
+        src="images/couple.jpg"
+        alt="Our photo"
+        onerror="
+          this.src='https://placehold.co/800x600/fff7fa/9a8991?text=Your+Photo+Here'
+        "
+      >
+
+
+      <div class="photo-caption">
+        One picture, many memories 🤍
       </div>
 
+    </div>
+
+
+    <!-- QUOTE -->
+
+    <div class="quote-card">
+
       <div
-        id="selectedFood"
-        class="result-food"
-      ></div>
+        id="randomQuote"
+        class="quote">
+
+        Apa pun yang awak rasa hari ni,
+        tak perlu paksa diri untuk okay
+        setiap masa. ❤️
+
+      </div>
+
+
+      <div class="small">
+
+        Rehat bila penat.
+        Luahkan bila berat.
+        One little step at a time.
+
+      </div>
+
+    </div>
+
+
+    <!-- MENU -->
+
+    <div class="menu-title">
+
+      What do you need right now?
+
+    </div>
+
+
+    <div class="menu-grid">
+
 
       <button
-        class="reset"
-        onclick="resetChoice()"
-      >
-        Choose again
+        class="menu-card"
+        onclick="showPage('foodPage')">
+
+        <div class="menu-icon">
+          🍽️
+        </div>
+
+        <div class="menu-name">
+          Makan
+        </div>
+
       </button>
 
+
+      <button
+        class="menu-card"
+        onclick="showPage('meluahPage')">
+
+        <div class="menu-icon">
+          💭
+        </div>
+
+        <div class="menu-name">
+          Meluah
+        </div>
+
+      </button>
+
+
+      <button
+        class="menu-card"
+        onclick="showPage('emotionPage')">
+
+        <div class="menu-icon">
+          🥹
+        </div>
+
+        <div class="menu-name">
+          Emotion
+        </div>
+
+      </button>
+
+
+      <button
+        class="menu-card"
+        onclick="showPage('settingsPage')">
+
+        <div class="menu-icon">
+          ⚙️
+        </div>
+
+        <div class="menu-name">
+          Settings
+        </div>
+
+      </button>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     MAKAN PAGE
+====================================================== -->
+
+<section
+  id="foodPage"
+  class="page">
+
+  <div class="container">
+
+
+    <button
+      class="back-btn"
+      onclick="showPage('homePage')">
+
+      ← Home
+
+    </button>
+
+
+    <h1 class="page-title">
+      🍽️ What to Eat?
+    </h1>
+
+
+    <div class="page-subtitle">
+      Pick something you feel like eating ❤️
     </div>
 
 
-    <div class="footer">
-      Made with ❤️
+    <div class="food-grid">
+
+
+      <button
+        class="food-btn"
+        onclick="openFoodModal('🍚 Rice')">
+
+        🍚 Rice
+
+      </button>
+
+
+      <button
+        class="food-btn"
+        onclick="openFoodModal('🍜 Noodles')">
+
+        🍜 Noodles
+
+      </button>
+
+
+      <button
+        class="food-btn"
+        onclick="openFoodModal('🍔 Burger')">
+
+        🍔 Burger
+
+      </button>
+
+
+      <button
+        class="food-btn"
+        onclick="openFoodModal('🍕 Pizza')">
+
+        🍕 Pizza
+
+      </button>
+
+
+      <button
+        class="food-btn"
+        onclick="openFoodModal('🍗 Chicken')">
+
+        🍗 Chicken
+
+      </button>
+
+
+      <button
+        class="food-btn"
+        onclick="openFoodModal('🍝 Pasta')">
+
+        🍝 Pasta
+
+      </button>
+
+
+      <button
+        class="food-btn"
+        onclick="openFoodModal('🍣 Sushi')">
+
+        🍣 Sushi
+
+      </button>
+
+
+      <button
+        class="food-btn"
+        onclick="openFoodModal('🥪 Sandwich')">
+
+        🥪 Sandwich
+
+      </button>
+
+
+      <button
+        class="food-btn"
+        onclick="openFoodModal('🍰 Dessert')">
+
+        🍰 Dessert
+
+      </button>
+
+
+      <button
+        class="food-btn"
+        onclick="openFoodModal('🥤 Drinks')">
+
+        🥤 Drinks
+
+      </button>
+
+
     </div>
 
 
-  </main>
+    <button
+      class="random-food"
+      onclick="randomFood()">
+
+      🎲 Random Food
+
+    </button>
 
 
-  <!-- MODAL -->
+    <div
+      id="foodResult"
+      class="food-result">
 
-  <div
-    id="foodModal"
-    class="modal"
-  >
-
-    <div class="modal-box">
-
-
-      <div class="modal-handle"></div>
+      <h3>
+        ❤️ Last Choice
+      </h3>
 
 
       <div
-        id="modalTitle"
-        class="modal-title"
-      >
-        🍳 Nasi Goreng
+        id="selectedFoodText">
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     EMOTION PAGE
+====================================================== -->
+
+<section
+  id="emotionPage"
+  class="page">
+
+  <div class="container">
+
+
+    <button
+      class="back-btn"
+      onclick="showPage('homePage')">
+
+      ← Home
+
+    </button>
+
+
+    <h1 class="page-title">
+      🥹 How are you feeling?
+    </h1>
+
+
+    <div class="page-subtitle">
+      Pick the emotion closest to you right now.
+    </div>
+
+
+    <div class="emotion-grid">
+
+
+      <button
+        class="emotion-btn"
+        onclick="selectEmotion('😊','Happy')">
+
+        <div class="emotion-icon">
+          😊
+        </div>
+
+        <div class="emotion-name">
+          Happy
+        </div>
+
+      </button>
+
+
+      <button
+        class="emotion-btn"
+        onclick="selectEmotion('🥰','Loved')">
+
+        <div class="emotion-icon">
+          🥰
+        </div>
+
+        <div class="emotion-name">
+          Loved
+        </div>
+
+      </button>
+
+
+      <button
+        class="emotion-btn"
+        onclick="selectEmotion('😔','Sad')">
+
+        <div class="emotion-icon">
+          😔
+        </div>
+
+        <div class="emotion-name">
+          Sad
+        </div>
+
+      </button>
+
+
+      <button
+        class="emotion-btn"
+        onclick="selectEmotion('😩','Tired')">
+
+        <div class="emotion-icon">
+          😩
+        </div>
+
+        <div class="emotion-name">
+          Tired
+        </div>
+
+      </button>
+
+
+      <button
+        class="emotion-btn"
+        onclick="selectEmotion('😡','Angry')">
+
+        <div class="emotion-icon">
+          😡
+        </div>
+
+        <div class="emotion-name">
+          Angry
+        </div>
+
+      </button>
+
+
+      <button
+        class="emotion-btn"
+        onclick="selectEmotion('🥺','Need Attention')">
+
+        <div class="emotion-icon">
+          🥺
+        </div>
+
+        <div class="emotion-name">
+          Attention
+        </div>
+
+      </button>
+
+
+      <button
+        class="emotion-btn"
+        onclick="selectEmotion('😶','Blank')">
+
+        <div class="emotion-icon">
+          😶
+        </div>
+
+        <div class="emotion-name">
+          Blank
+        </div>
+
+      </button>
+
+
+      <button
+        class="emotion-btn"
+        onclick="selectEmotion('😌','Calm')">
+
+        <div class="emotion-icon">
+          😌
+        </div>
+
+        <div class="emotion-name">
+          Calm
+        </div>
+
+      </button>
+
+
+      <button
+        class="emotion-btn"
+        onclick="selectEmotion('🤍','Need Someone')">
+
+        <div class="emotion-icon">
+          🤍
+        </div>
+
+        <div class="emotion-name">
+          Someone
+        </div>
+
+      </button>
+
+
+    </div>
+
+
+    <div
+      id="emotionShow"
+      class="emotion-show">
+
+
+      <div
+        id="bigEmotion"
+        class="big-emotion">
+
+        😊
+
       </div>
 
 
-      <div class="modal-subtitle">
-        Nak yang macam mana?
+      <div
+        id="emotionMessage"
+        class="emotion-message">
+
       </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     MELUAH PAGE
+====================================================== -->
+
+<section
+  id="meluahPage"
+  class="page">
+
+  <div class="container">
+
+
+    <button
+      class="back-btn"
+      onclick="showPage('homePage')">
+
+      ← Home
+
+    </button>
+
+
+    <h1 class="page-title">
+      💭 Meluah
+    </h1>
+
+
+    <div class="page-subtitle">
+      Write whatever is on your mind.
+    </div>
+
+
+    <div class="feel-card">
 
 
       <textarea
-        id="foodSpecification"
-        placeholder="Tulis spesifikasi makanan..."
-      ></textarea>
+        id="feelingText"
+        placeholder="Tulis apa yang awak rasa dekat sini...">
+      </textarea>
 
 
-      <div class="modal-buttons">
+      <button
+        class="send-btn"
+        onclick="sendFeeling()">
+
+        ❤️ Send What I Feel
+
+      </button>
+
+
+      <div
+        id="feelingStatus"
+        class="status">
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     SETTINGS PAGE
+====================================================== -->
+
+<section
+  id="settingsPage"
+  class="page">
+
+  <div class="container">
+
+
+    <button
+      class="back-btn"
+      onclick="showPage('homePage')">
+
+      ← Home
+
+    </button>
+
+
+    <h1 class="page-title">
+      ⚙️ Settings
+    </h1>
+
+
+    <div class="page-subtitle">
+      Customize your space.
+    </div>
+
+
+    <div class="settings-card">
+
+
+      <!-- DARK MODE -->
+
+      <div class="setting-row">
+
+
+        <div class="setting-left">
+
+          <div class="setting-icon">
+            🌙
+          </div>
+
+          <div class="setting-text">
+            Dark Mode
+          </div>
+
+        </div>
 
 
         <button
-          class="cancel-btn"
-          onclick="closeModal()"
-        >
-          Cancel
+          id="darkToggle"
+          class="toggle"
+          onclick="toggleDarkMode()">
         </button>
 
 
+      </div>
+
+
+      <!-- NOTIFICATION -->
+
+      <div class="setting-row">
+
+
+        <div class="setting-left">
+
+          <div class="setting-icon">
+            🔔
+          </div>
+
+          <div class="setting-text">
+            Notifications
+          </div>
+
+        </div>
+
+
         <button
-          class="confirm-btn"
-          onclick="confirmFood()"
-        >
-          ❤️ Confirm
+          class="clear-btn"
+          onclick="requestFCMToken()">
+
+          Enable
+
+        </button>
+
+
+      </div>
+
+
+      <!-- CLEAR LOCAL -->
+
+      <div class="setting-row">
+
+
+        <div class="setting-left">
+
+          <div class="setting-icon">
+            🧹
+          </div>
+
+          <div class="setting-text">
+            Clear Local Data
+          </div>
+
+        </div>
+
+
+        <button
+          class="clear-btn"
+          onclick="clearLocalData()">
+
+          Clear
+
         </button>
 
 
@@ -632,306 +1676,1252 @@
 
   </div>
 
-
-  <!-- MAIN JAVASCRIPT -->
-
-  <script>
-
-    let selectedMenu = "";
+</section>
 
 
-    // OPEN MODAL
+<!-- =====================================================
+     BOTTOM NAV
+====================================================== -->
 
-    function openModal(food, placeholder) {
+<div class="bottom-nav">
 
-      selectedMenu = food;
 
-      document.getElementById("modalTitle")
-        .textContent = food;
+  <button
+    class="nav-btn active"
+    onclick="showPage('homePage')">
 
-      document.getElementById("foodSpecification")
-        .placeholder = placeholder;
+    <span class="nav-icon">
+      🏠
+    </span>
 
-      document.getElementById("foodSpecification")
-        .value = "";
+    Home
 
-      document.getElementById("foodModal")
-        .classList.add("show");
+  </button>
 
-      setTimeout(function() {
 
-        document.getElementById("foodSpecification")
-          .focus();
+  <button
+    class="nav-btn"
+    onclick="showPage('foodPage')">
 
-      }, 200);
+    <span class="nav-icon">
+      🍽️
+    </span>
+
+    Makan
+
+  </button>
+
+
+  <button
+    class="nav-btn"
+    onclick="showPage('meluahPage')">
+
+    <span class="nav-icon">
+      💭
+    </span>
+
+    Meluah
+
+  </button>
+
+
+  <button
+    class="nav-btn"
+    onclick="showPage('emotionPage')">
+
+    <span class="nav-icon">
+      🥹
+    </span>
+
+    Emotion
+
+  </button>
+
+
+  <button
+    class="nav-btn"
+    onclick="showPage('settingsPage')">
+
+    <span class="nav-icon">
+      ⚙️
+    </span>
+
+    Settings
+
+  </button>
+
+
+</div>
+
+
+<!-- =====================================================
+     FOOD MODAL
+====================================================== -->
+
+<div
+  id="foodModal"
+  class="modal">
+
+
+  <div class="modal-box">
+
+
+    <h2
+      id="modalFoodTitle">
+
+      🍚 Rice
+
+    </h2>
+
+
+    <p>
+      Nak macam mana?
+    </p>
+
+
+    <input
+      id="foodSpecification"
+      type="text"
+      placeholder="Contoh: spicy, cheese, less spicy...">
+
+
+    <div class="modal-buttons">
+
+
+      <button
+        class="cancel-btn"
+        onclick="closeFoodModal()">
+
+        Cancel
+
+      </button>
+
+
+      <button
+        class="confirm-btn"
+        onclick="confirmFood()">
+
+        Confirm ❤️
+
+      </button>
+
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     MAIN JAVASCRIPT
+====================================================== -->
+
+<script>
+
+
+/* =========================
+   PAGE NAVIGATION
+========================= */
+
+function showPage(pageId) {
+
+  document
+    .querySelectorAll(".page")
+    .forEach(page => {
+
+      page.classList.remove("active");
+
+    });
+
+
+  const page =
+    document.getElementById(pageId);
+
+
+  if (page) {
+
+    page.classList.add("active");
+
+  }
+
+
+  updateNav(pageId);
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+/* =========================
+   NAVIGATION ACTIVE
+========================= */
+
+function updateNav(pageId) {
+
+  document
+    .querySelectorAll(".nav-btn")
+    .forEach(btn => {
+
+      btn.classList.remove("active");
+
+    });
+
+
+  const mapping = {
+
+    homePage: 0,
+    foodPage: 1,
+    meluahPage: 2,
+    emotionPage: 3,
+    settingsPage: 4
+
+  };
+
+
+  const index =
+    mapping[pageId];
+
+
+  if (index !== undefined) {
+
+    document
+      .querySelectorAll(".nav-btn")[index]
+      .classList.add("active");
+
+  }
+
+}
+
+
+/* =========================
+   GREETING
+========================= */
+
+function setGreeting() {
+
+  const hour =
+    new Date().getHours();
+
+
+  let greeting;
+
+
+  if (hour < 12) {
+
+    greeting =
+      "Good morning ☀️";
+
+  }
+
+  else if (hour < 18) {
+
+    greeting =
+      "Good afternoon 🌤️";
+
+  }
+
+  else {
+
+    greeting =
+      "Good night 🌙";
+
+  }
+
+
+  document
+    .getElementById("greeting")
+    .textContent =
+      greeting;
+
+}
+
+
+setGreeting();
+
+
+/* =========================
+   RANDOM QUOTES
+========================= */
+
+const quotes = [
+
+  "Apa pun yang awak rasa hari ni, tak perlu paksa diri untuk okay setiap masa. ❤️",
+
+  "Tak apa kalau hari ni tak sempurna. Awak dah buat yang terbaik. 🤍",
+
+  "Rehat bukan bermaksud mengalah. Kadang-kadang kita cuma perlukan masa. 🌷",
+
+  "Satu perkara pada satu masa. Tak perlu selesaikan semuanya hari ni. 🤍",
+
+  "Kalau hari ni terasa berat, ambil nafas dan perlahan sedikit. 🫂",
+
+  "Perasaan awak tetap valid walaupun susah untuk dijelaskan. 🤍"
+
+];
+
+
+document
+  .getElementById("randomQuote")
+  .textContent =
+    quotes[
+      Math.floor(
+        Math.random() *
+        quotes.length
+      )
+    ];
+
+
+/* =========================
+   FOOD
+========================= */
+
+let currentFood = "";
+
+
+const foodList = [
+
+  "🍚 Rice",
+  "🍜 Noodles",
+  "🍔 Burger",
+  "🍕 Pizza",
+  "🍗 Chicken",
+  "🍝 Pasta",
+  "🍣 Sushi",
+  "🥪 Sandwich",
+  "🍰 Dessert",
+  "🥤 Drinks"
+
+];
+
+
+function openFoodModal(food) {
+
+  currentFood = food;
+
+
+  document
+    .getElementById("modalFoodTitle")
+    .textContent = food;
+
+
+  document
+    .getElementById("foodSpecification")
+    .value = "";
+
+
+  document
+    .getElementById("foodModal")
+    .classList.add("active");
+
+}
+
+
+function closeFoodModal() {
+
+  document
+    .getElementById("foodModal")
+    .classList.remove("active");
+
+}
+
+
+function confirmFood() {
+
+  const specification =
+    document
+      .getElementById("foodSpecification")
+      .value
+      .trim();
+
+
+  let finalChoice =
+    currentFood;
+
+
+  if (specification !== "") {
+
+    finalChoice +=
+      " — " +
+      specification;
+
+  }
+
+
+  localStorage.setItem(
+    "selectedFood",
+    finalChoice
+  );
+
+
+  document
+    .getElementById("selectedFoodText")
+    .textContent =
+      finalChoice;
+
+
+  document
+    .getElementById("foodResult")
+    .style.display =
+      "block";
+
+
+  if (
+    typeof window.sendFoodChoice ===
+    "function"
+  ) {
+
+    window.sendFoodChoice(
+      finalChoice
+    );
+
+  }
+
+
+  closeFoodModal();
+
+  createHeart();
+
+}
+
+
+/* RANDOM FOOD */
+
+function randomFood() {
+
+  const random =
+    foodList[
+      Math.floor(
+        Math.random() *
+        foodList.length
+      )
+    ];
+
+
+  openFoodModal(random);
+
+}
+
+
+/* LOAD LAST FOOD */
+
+const savedFood =
+  localStorage.getItem(
+    "selectedFood"
+  );
+
+
+if (savedFood) {
+
+  document
+    .getElementById("selectedFoodText")
+    .textContent =
+      savedFood;
+
+
+  document
+    .getElementById("foodResult")
+    .style.display =
+      "block";
+
+}
+
+
+/* =========================
+   EMOTION
+========================= */
+
+const emotionMessages = {
+
+  Happy:
+    "You're feeling happy today. Keep that little smile ❤️",
+
+  Loved:
+    "You deserve to feel loved and appreciated. 🤍",
+
+  Sad:
+    "It's okay to have a sad day. Take things slowly. 🤍",
+
+  Tired:
+    "Rest is okay. You don't have to do everything at once. 🫂",
+
+  Angry:
+    "Take a breath and give yourself some space. 🤍",
+
+  "Need Attention":
+    "Sometimes we just need a little attention and comfort. 🥺",
+
+  Blank:
+    "You don't always need to know what you're feeling. Take your time. 🤍",
+
+  Calm:
+    "Enjoy this peaceful moment. You deserve it. 😌",
+
+  "Need Someone":
+    "You don't have to keep everything to yourself. 🤍"
+
+};
+
+
+function selectEmotion(
+  icon,
+  emotionName
+) {
+
+
+  document
+    .getElementById("bigEmotion")
+    .textContent =
+      icon;
+
+
+  document
+    .getElementById("emotionMessage")
+    .textContent =
+      emotionMessages[
+        emotionName
+      ];
+
+
+  const show =
+    document.getElementById(
+      "emotionShow"
+    );
+
+
+  show.classList.remove(
+    "active"
+  );
+
+
+  void show.offsetWidth;
+
+
+  show.classList.add(
+    "active"
+  );
+
+
+  localStorage.setItem(
+    "selectedEmotion",
+    emotionName
+  );
+
+
+  localStorage.setItem(
+    "selectedEmotionIcon",
+    icon
+  );
+
+
+  if (
+    typeof window.sendEmotionToFirebase ===
+    "function"
+  ) {
+
+    window.sendEmotionToFirebase({
+
+      emotion:
+        icon,
+
+      emotionName:
+        emotionName
+
+    });
+
+  }
+
+
+  createHeart();
+
+}
+
+
+/* =========================
+   MELUAH
+========================= */
+
+async function sendFeeling() {
+
+  const text =
+    document
+      .getElementById(
+        "feelingText"
+      )
+      .value
+      .trim();
+
+
+  const status =
+    document.getElementById(
+      "feelingStatus"
+    );
+
+
+  if (!text) {
+
+    status.textContent =
+      "Tulis sesuatu dulu 🤍";
+
+    return;
+
+  }
+
+
+  const emotion =
+    localStorage.getItem(
+      "selectedEmotion"
+    ) || "";
+
+
+  const emotionIcon =
+    localStorage.getItem(
+      "selectedEmotionIcon"
+    ) || "";
+
+
+  localStorage.setItem(
+    "lastFeeling",
+    text
+  );
+
+
+  if (
+    typeof window.sendFeelingToFirebase ===
+    "function"
+  ) {
+
+    await window.sendFeelingToFirebase({
+
+      emotion:
+        emotionIcon,
+
+      emotionName:
+        emotion,
+
+      message:
+        text
+
+    });
+
+
+    status.textContent =
+      "Dah dihantar ❤️";
+
+  }
+
+  else {
+
+    status.textContent =
+      "Tersimpan dekat phone ❤️";
+
+  }
+
+
+  document
+    .getElementById(
+      "feelingText"
+    )
+    .value = "";
+
+
+  createHeart();
+
+}
+
+
+/* =========================
+   DARK MODE
+========================= */
+
+function toggleDarkMode() {
+
+  document
+    .body
+    .classList
+    .toggle("dark");
+
+
+  const isDark =
+    document.body
+      .classList
+      .contains("dark");
+
+
+  localStorage.setItem(
+    "darkMode",
+    isDark
+  );
+
+
+  updateDarkToggle();
+
+}
+
+
+function updateDarkToggle() {
+
+  const toggle =
+    document.getElementById(
+      "darkToggle"
+    );
+
+
+  const isDark =
+    document.body
+      .classList
+      .contains("dark");
+
+
+  toggle.classList.toggle(
+    "on",
+    isDark
+  );
+
+}
+
+
+if (
+  localStorage.getItem(
+    "darkMode"
+  ) === "true"
+) {
+
+  document
+    .body
+    .classList
+    .add("dark");
+
+}
+
+
+updateDarkToggle();
+
+
+/* =========================
+   CLEAR LOCAL DATA
+========================= */
+
+function clearLocalData() {
+
+  const confirmClear =
+    confirm(
+      "Clear local data from this phone?"
+    );
+
+
+  if (!confirmClear) {
+    return;
+  }
+
+
+  localStorage.removeItem(
+    "selectedFood"
+  );
+
+  localStorage.removeItem(
+    "selectedEmotion"
+  );
+
+  localStorage.removeItem(
+    "selectedEmotionIcon"
+  );
+
+  localStorage.removeItem(
+    "lastFeeling"
+  );
+
+
+  location.reload();
+
+}
+
+
+/* =========================
+   NOTIFICATION PERMISSION
+========================= */
+
+async function requestNotification() {
+
+  if (
+    !("Notification" in window)
+  ) {
+
+    alert(
+      "Notification tidak disokong pada browser ini."
+    );
+
+    return;
+
+  }
+
+
+  const permission =
+    await Notification.requestPermission();
+
+
+  if (
+    permission === "granted"
+  ) {
+
+    alert(
+      "Notification dah dibenarkan 🔔"
+    );
+
+  }
+
+  else {
+
+    alert(
+      "Notification belum dibenarkan."
+    );
+
+  }
+
+}
+
+
+/* =========================
+   FLOATING HEART
+========================= */
+
+function createHeart() {
+
+  const heart =
+    document.createElement(
+      "div"
+    );
+
+
+  heart.className =
+    "float-heart";
+
+
+  const hearts = [
+    "❤️",
+    "🤍",
+    "💕",
+    "💗",
+    "✨"
+  ];
+
+
+  heart.textContent =
+    hearts[
+      Math.floor(
+        Math.random() *
+        hearts.length
+      )
+    ];
+
+
+  heart.style.left =
+    Math.random() *
+    100 +
+    "%";
+
+
+  document.body.appendChild(
+    heart
+  );
+
+
+  setTimeout(() => {
+
+    heart.remove();
+
+  }, 4000);
+
+}
+
+
+/* =========================
+   SERVICE WORKER
+========================= */
+
+if (
+  "serviceWorker" in navigator
+) {
+
+  window.addEventListener(
+    "load",
+    () => {
+
+      navigator.serviceWorker
+        .register(
+          "./service-worker.js"
+        )
+
+        .then(() => {
+
+          console.log(
+            "App ready"
+          );
+
+        })
+
+        .catch(error => {
+
+          console.log(
+            "Service Worker error:",
+            error
+          );
+
+        });
 
     }
+  );
+
+}
+
+</script>
 
 
-    // CLOSE MODAL
+<!-- =====================================================
+     FIREBASE REALTIME DATABASE
+====================================================== -->
 
-    function closeModal() {
+<script type="module">
 
-      document.getElementById("foodModal")
-        .classList.remove("show");
+  import {
+    initializeApp
+  } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
-    }
+  import {
+    getDatabase,
+    ref,
+    push,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
-
-    // CONFIRM FOOD
-
-    function confirmFood() {
-
-      const specification =
-        document.getElementById("foodSpecification")
-          .value
-          .trim();
-
-
-      let finalChoice;
-
-
-      if (specification !== "") {
-
-        finalChoice =
-          selectedMenu +
-          " — " +
-          specification;
-
-      } else {
-
-        finalChoice =
-          selectedMenu;
-
-      }
+  import {
+    getMessaging,
+    getToken,
+    onMessage
+  } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-messaging.js";
 
 
-      document.getElementById("selectedFood")
-        .textContent = finalChoice;
+  /* =========================
+     FIREBASE CONFIG
+  ========================= */
+
+  const firebaseConfig = {
+
+    apiKey:
+      "AIzaSyDSFvZ3JtqTB7HP85WyRa5dka9VRUJdKDU",
+
+    authDomain:
+      "baby-7eec4.firebaseapp.com",
+
+    databaseURL:
+      "https://baby-7eec4-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+    projectId:
+      "baby-7eec4",
+
+    storageBucket:
+      "baby-7eec4.firebasestorage.app",
+
+    messagingSenderId:
+      "824621868036",
+
+    appId:
+      "1:824621868036:web:870a7c66e9311fb77ec151"
+
+  };
 
 
-      document.getElementById("result")
-        .classList.add("show");
+  /* =========================
+     INITIALIZE FIREBASE
+  ========================= */
+
+  const app =
+    initializeApp(firebaseConfig);
 
 
-      // SAVE LOCALLY
-
-      localStorage.setItem(
-        "selectedFood",
-        finalChoice
-      );
+  const db =
+    getDatabase(app);
 
 
-      // SEND TO FIREBASE
-
-      if (typeof window.sendFoodChoice === "function") {
-
-        window.sendFoodChoice(finalChoice);
-
-      } else {
-
-        console.error(
-          "Firebase function is not ready."
-        );
-
-      }
+  const messaging =
+    getMessaging(app);
 
 
-      closeModal();
+  /* =========================
+     VAPID KEY
+  ========================= */
+
+  const vapidKey =
+    "BONfPTam1Qa95trwwKDJvJbV-s-yCkNAexfQCcORGo2aEQ4w-tiTRn_ZGtmp_bz7b6W5v-ugO01bfYcH_iM2dMU";
 
 
-      // SCROLL TO RESULT
+  /* =========================
+     GET NOTIFICATION TOKEN
+  ========================= */
 
-      setTimeout(function() {
+  window.requestFCMToken =
+    async function() {
 
-        document.getElementById("result")
-          .scrollIntoView({
-            behavior: "smooth"
-          });
+      try {
 
-      }, 100);
-
-    }
-
-
-    // RESET
-
-    function resetChoice() {
-
-      document.getElementById("result")
-        .classList.remove("show");
-
-      localStorage.removeItem("selectedFood");
-
-    }
+        const permission =
+          await Notification.requestPermission();
 
 
-    // LOAD SAVED FOOD
+        if (
+          permission !== "granted"
+        ) {
 
-    window.onload = function() {
+          alert(
+            "Notification belum dibenarkan 🔔"
+          );
 
-      const savedFood =
-        localStorage.getItem("selectedFood");
-
-
-      if (savedFood) {
-
-        document.getElementById("selectedFood")
-          .textContent = savedFood;
-
-        document.getElementById("result")
-          .classList.add("show");
-
-      }
-
-    };
-
-
-    // CLOSE WHEN CLICK OUTSIDE
-
-    document.getElementById("foodModal")
-      .addEventListener("click", function(event) {
-
-        if (event.target === this) {
-
-          closeModal();
+          return;
 
         }
 
-      });
 
-  </script>
-
-
-  <!-- SERVICE WORKER -->
-
-  <script>
-
-    if ("serviceWorker" in navigator) {
-
-      window.addEventListener("load", () => {
-
-        navigator.serviceWorker
-          .register("./sw.js")
-
-          .then(() => {
-
-            console.log("✅ App ready");
-
-          })
-
-          .catch(error => {
-
-            console.error(
-              "❌ Service Worker error:",
-              error
-            );
-
-          });
-
-      });
-
-    }
-
-  </script>
+        const registration =
+          await navigator.serviceWorker.ready;
 
 
-  <!-- FIREBASE REALTIME DATABASE -->
-
-  <script type="module">
-
-    import {
-      initializeApp
-    }
-    from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-
-
-    import {
-      getDatabase,
-      ref,
-      push,
-      serverTimestamp
-    }
-    from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
-
-
-    const firebaseConfig = {
-
-      apiKey:
-        "AIzaSyDSFvZ3JtqTB7HP85WyRa5dka9VRUJdKDU",
-
-      authDomain:
-        "baby-7eec4.firebaseapp.com",
-
-      databaseURL:
-        "https://baby-7eec4-default-rtdb.asia-southeast1.firebasedatabase.app",
-
-      projectId:
-        "baby-7eec4",
-
-      storageBucket:
-        "baby-7eec4.firebasestorage.app",
-
-      messagingSenderId:
-        "824621868036",
-
-      appId:
-        "1:824621868036:web:870a7c66e9311fb77ec151"
-
-    };
-
-
-    // INITIALIZE FIREBASE
-
-    const app =
-      initializeApp(firebaseConfig);
-
-
-    const db =
-      getDatabase(app);
-
-
-    // SEND FOOD CHOICE
-
-    window.sendFoodChoice =
-      async function(food) {
-
-        try {
-
-          await push(
-            ref(db, "foodChoices"),
+        const token =
+          await getToken(
+            messaging,
             {
-              food: food,
-              timestamp: serverTimestamp()
+              vapidKey:
+                vapidKey,
+
+              serviceWorkerRegistration:
+                registration
             }
           );
 
 
+        if (token) {
+
           console.log(
-            "✅ Food choice sent:",
-            food
+            "🔥 FCM TOKEN:",
+            token
           );
 
 
-        } catch (error) {
+          localStorage.setItem(
+            "fcmToken",
+            token
+          );
 
-          console.error(
-            "❌ Failed to send food choice:",
-            error
+
+          alert(
+            "Notification dah aktif 🔔❤️"
           );
 
         }
 
-      };
+        else {
+
+          console.log(
+            "FCM token tak dapat."
+          );
+
+        }
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "❌ FCM error:",
+          error
+        );
+
+        alert(
+          "Notification gagal diaktifkan. Tengok Console untuk error."
+        );
+
+      }
+
+    };
 
 
-    console.log(
-      "🔥 Firebase connected"
-    );
+  /* =========================
+     FOOD → FIREBASE
+  ========================= */
 
-  </script>
+  window.sendFoodChoice =
+    async function(food) {
+
+      try {
+
+        await push(
+          ref(
+            db,
+            "foodChoices"
+          ),
+          {
+
+            food:
+              food,
+
+            timestamp:
+              serverTimestamp()
+
+          }
+        );
+
+
+        console.log(
+          "✅ Food choice sent:",
+          food
+        );
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "❌ Failed to send food choice:",
+          error
+        );
+
+      }
+
+    };
+
+
+  /* =========================
+     EMOTION → FIREBASE
+  ========================= */
+
+  window.sendEmotionToFirebase =
+    async function(data) {
+
+      try {
+
+        await push(
+          ref(
+            db,
+            "emotions"
+          ),
+          {
+
+            emotion:
+              data.emotion,
+
+            emotionName:
+              data.emotionName,
+
+            timestamp:
+              serverTimestamp()
+
+          }
+        );
+
+
+        console.log(
+          "✅ Emotion sent:",
+          data.emotionName
+        );
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "❌ Failed to send emotion:",
+          error
+        );
+
+      }
+
+    };
+
+
+  /* =========================
+     MELUAH → FIREBASE
+  ========================= */
+
+  window.sendFeelingToFirebase =
+    async function(data) {
+
+      try {
+
+        await push(
+          ref(
+            db,
+            "feelings"
+          ),
+          {
+
+            emotion:
+              data.emotion || "",
+
+            emotionName:
+              data.emotionName || "",
+
+            message:
+              data.message,
+
+            timestamp:
+              serverTimestamp()
+
+          }
+        );
+
+
+        console.log(
+          "✅ Feeling sent"
+        );
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "❌ Failed to send feeling:",
+          error
+        );
+
+        throw error;
+
+      }
+
+    };
+
+
+  /* =========================
+     FOREGROUND NOTIFICATION
+  ========================= */
+
+  onMessage(
+    messaging,
+    payload => {
+
+      console.log(
+        "📩 Foreground message:",
+        payload
+      );
+
+      alert(
+        payload.notification?.title ||
+        "Sayang Space ❤️"
+      );
+
+    }
+  );
+
+
+  console.log(
+    "🔥 Firebase + FCM ready"
+  );
+
+</script>
+
 
 
 </body>
-
 </html>
