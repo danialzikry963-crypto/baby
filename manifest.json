@@ -1,0 +1,9 @@
+{
+  "name": "Sayang Eats",
+  "short_name": "Sayang Eats",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fff7fa",
+  "theme_color": "#fff7fa",
+  "description": "Choose what Sayang wants to eat."
+}
