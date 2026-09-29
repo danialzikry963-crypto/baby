@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#fff7fa">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Sayang Eats">
+
+  <title>Sayang Nak Makan Apa?</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #fff7fa;
+      color: #292329;
+    }
+
+    .app {
+      max-width: 430px;
+      min-height: 100vh;
+      margin: auto;
+      padding: 25px 18px 40px;
+    }
+
+    /* HEADER */
+
+    .header {
+      text-align: center;
+      padding: 20px 0 25px;
+    }
+
+    .heart {
+      font-size: 42px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 27px;
+      font-weight: 750;
+    }
+
+    .subtitle {
+      margin-top: 7px;
+      color: #8b7b83;
+      font-size: 14px;
+    }
+
+    /* TITLE */
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 18px 0 12px;
+    }
+
+    /* FOOD GRID */
+
+    .food-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .food {
+      background: white;
+      border: none;
+      border-radius: 20px;
+      padding: 18px 12px;
+      box-shadow: 0 5px 18px rgba(80, 30, 50, 0.08);
+      cursor: pointer;
+      transition: 0.15s;
+    }
+
+    .food:active {
+      transform: scale(0.94);
+    }
+
+    .emoji {
+      font-size: 38px;
+      margin-bottom: 8px;
+    }
+
+    .food-name {
+      font-size: 15px;
+      font-weight: 650;
+    }
+
+    /* RESULT */
+
+    .result {
+      display: none;
+      margin-top: 22px;
+      background: #292329;
+      color: white;
+      border-radius: 22px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .result.show {
+      display: block;
+    }
+
+    .result-small {
+      font-size: 13px;
+      opacity: 0.7;
+      margin-bottom: 8px;
+    }
+
+    .result-food {
+      font-size: 20px;
+      font-weight: 750;
+      line-height: 1.4;
+    }
+
+    .reset {
+      margin-top: 14px;
+      border: none;
+      background: white;
+      color: #292329;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* MODAL BACKGROUND */
+
+    .modal {
+      display: none;
+
+      position: fixed;
+      z-index: 1000;
+
+      left: 0;
+      top: 0;
+
+      width: 100%;
+      height: 100%;
+
+      background: rgba(0, 0, 0, 0.45);
+
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    /* MODAL BOX */
+
+    .modal-box {
+      width: 100%;
+      max-width: 430px;
+
+      background: white;
+
+      border-radius: 28px 28px 0 0;
+
+      padding: 25px 20px 30px;
+
+      animation: slideUp 0.25s ease;
+    }
+
+    @keyframes slideUp {
+
+      from {
+        transform: translateY(100%);
+      }
+
+      to {
+        transform: translateY(0);
+      }
+
+    }
+
+    .modal-handle {
+      width: 45px;
+      height: 5px;
+
+      background: #ddd;
+
+      border-radius: 20px;
+
+      margin: 0 auto 20px;
+    }
+
+    .modal-title {
+      text-align: center;
+      font-size: 21px;
+      font-weight: 750;
+
+      margin-bottom: 6px;
+    }
+
+    .modal-subtitle {
+      text-align: center;
+
+      color: #8b7b83;
+
+      font-size: 13px;
+
+      margin-bottom: 20px;
+    }
+
+    /* INPUT */
+
+    textarea {
+      width: 100%;
+
+      min-height: 110px;
+
+      border: 1px solid #e5dfe2;
+
+      border-radius: 16px;
+
+      padding: 15px;
+
+      resize: none;
+
+      font-size: 15px;
+
+      outline: none;
+
+      background: #faf8f9;
+    }
+
+    textarea:focus {
+      border-color: #292329;
+    }
+
+    /* MODAL BUTTONS */
+
+    .modal-buttons {
+      display: flex;
+
+      gap: 10px;
+
+      margin-top: 14px;
+    }
+
+    .cancel-btn,
+    .confirm-btn {
+
+      flex: 1;
+
+      border: none;
+
+      padding: 14px;
+
+      border-radius: 15px;
+
+      font-size: 15px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+
+    .cancel-btn {
+      background: #f1edef;
+      color: #292329;
+    }
+
+    .confirm-btn {
+      background: #292329;
+      color: white;
+    }
+
+    /* FOOTER */
+
+    .footer {
+      text-align: center;
+
+      margin-top: 30px;
+
+      color: #a08f97;
+
+      font-size: 12px;
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <main class="app">
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+      <div class="heart">
+        ❤️
+      </div>
+
+      <h1>
+        What does Sayang want?
+      </h1>
+
+      <p class="subtitle">
+        Pick something you feel like eating today.
+      </p>
+
+    </header>
+
+
+    <!-- FOOD -->
+
+    <h2 class="section-title">
+      🍽️ Choose your food
+    </h2>
+
+
+    <div class="food-list">
+
+
+      <button
+        class="food"
+        onclick="openModal('🍗 Nasi Ayam', 'Contoh: nasi ayam, ayam crispy, kuah lebih')"
+      >
+
+        <div class="emoji">🍗</div>
+
+        <div class="food-name">
+          Nasi Ayam
+        </div>
+
+      </button>
+
+
+      <button
+        class="food"
+        onclick="openModal('🍳 Nasi Goreng', 'Contoh: nasi goreng ayam, kurang pedas')"
+      >
+
+        <div class="emoji">🍳</div>
+
+        <div class="food-name">
+          Nasi Goreng
+        </div>
+
+      </button>
+
+
+      <button
+        class="food"
+        onclick="openModal('🍜 Maggi Goreng', 'Contoh: maggi goreng ayam, telur mata')"
+      >
+
+        <div class="emoji">🍜</div>
+
+        <div class="food-name">
+          Maggi Goreng
+        </div>
+
+      </button>
+
+
+      <button
+        class="food"
+        onclick="openModal('🍲 Tomyam', 'Contoh: tomyam ayam, tak nak cendawan')"
+      >
+
+        <div class="emoji">🍲</div>
+
+        <div class="food-name">
+          Tomyam
+        </div>
+
+      </button>
+
+
+      <button
+        class="food"
+        onclick="openModal('🍔 McDonald’s', 'Contoh: McChicken, fries, Coke')"
+      >
+
+        <div class="emoji">🍔</div>
+
+        <div class="food-name">
+          McDonald's
+        </div>
+
+      </button>
+
+
+      <button
+        class="food"
+        onclick="openModal('🍕 Pizza', 'Contoh: chicken pepperoni, extra cheese')"
+      >
+
+        <div class="emoji">🍕</div>
+
+        <div class="food-name">
+          Pizza
+        </div>
+
+      </button>
+
+
+      <button
+        class="food"
+        onclick="openModal('🍗 KFC', 'Contoh: 2pcs chicken, fries, Coke')"
+      >
+
+        <div class="emoji">🍗</div>
+
+        <div class="food-name">
+          KFC
+        </div>
+
+      </button>
+
+
+      <button
+        class="food"
+        onclick="openModal('🍝 Spaghetti', 'Contoh: spaghetti bolognese, extra cheese')"
+      >
+
+        <div class="emoji">🍝</div>
+
+        <div class="food-name">
+          Spaghetti
+        </div>
+
+      </button>
+
+
+      <button
+        class="food"
+        onclick="openModal('🥤 Minuman', 'Contoh: Milo ais kurang manis')"
+      >
+
+        <div class="emoji">🥤</div>
+
+        <div class="food-name">
+          Minuman
+        </div>
+
+      </button>
+
+
+      <button
+        class="food"
+        onclick="openModal('🍰 Dessert', 'Contoh: chocolate cake, tak nak terlalu manis')"
+      >
+
+        <div class="emoji">🍰</div>
+
+        <div class="food-name">
+          Dessert
+        </div>
+
+      </button>
+      <button
+  class="food"
+  onclick="openModal('🤷‍♀️ Tak tahu nak makan apa', 'Contoh: abang pilihkan untuk saya')"
+>
+  <div class="emoji">🤷‍♀️</div>
+
+  <div class="food-name">
+    Tak tahu nak makan apa
+  </div>
+</button>
+
+
+    </div>
+
+
+    <!-- RESULT -->
+
+    <div
+      id="result"
+      class="result"
+    >
+
+      <div class="result-small">
+        ❤️ Sayang pilih...
+      </div>
+
+      <div
+        id="selectedFood"
+        class="result-food"
+      ></div>
+
+      <button
+        class="reset"
+        onclick="resetChoice()"
+      >
+        Choose again
+      </button>
+
+    </div>
+
+
+    <div class="footer">
+      Made with ❤️
+    </div>
+
+  </main>
+
+
+  <!-- MODAL -->
+
+  <div
+    id="foodModal"
+    class="modal"
+  >
+
+    <div class="modal-box">
+
+
+      <div class="modal-handle"></div>
+
+
+      <div
+        id="modalTitle"
+        class="modal-title"
+      >
+        🍳 Nasi Goreng
+      </div>
+
+
+      <div class="modal-subtitle">
+        Nak yang macam mana?
+      </div>
+
+
+      <textarea
+        id="foodSpecification"
+        placeholder="Tulis spesifikasi makanan..."
+      ></textarea>
+
+
+      <div class="modal-buttons">
+
+
+        <button
+          class="cancel-btn"
+          onclick="closeModal()"
+        >
+          Cancel
+        </button>
+
+
+        <button
+          class="confirm-btn"
+          onclick="confirmFood()"
+        >
+          ❤️ Confirm
+        </button>
+
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    let selectedMenu = "";
+
+
+    // OPEN MODAL
+
+    function openModal(food, placeholder) {
+
+      selectedMenu = food;
+
+      document.getElementById("modalTitle")
+        .textContent = food;
+
+      document.getElementById("foodSpecification")
+        .placeholder = placeholder;
+
+      document.getElementById("foodSpecification")
+        .value = "";
+
+      document.getElementById("foodModal")
+        .classList.add("show");
+
+      setTimeout(function() {
+
+        document.getElementById("foodSpecification")
+          .focus();
+
+      }, 200);
+
+    }
+
+
+    // CLOSE MODAL
+
+    function closeModal() {
+
+      document.getElementById("foodModal")
+        .classList.remove("show");
+
+    }
+
+
+    // CONFIRM FOOD
+
+    function confirmFood() {
+
+      const specification =
+        document.getElementById("foodSpecification")
+        .value
+        .trim();
+
+
+      let finalChoice;
+
+
+      if (specification !== "") {
+
+        finalChoice =
+          selectedMenu +
+          " — " +
+          specification;
+
+      } else {
+
+        finalChoice =
+          selectedMenu;
+
+      }
+
+
+      document.getElementById("selectedFood")
+        .textContent = finalChoice;
+
+
+      document.getElementById("result")
+        .classList.add("show");
+
+
+      // SAVE
+
+      localStorage.setItem(
+        "selectedFood",
+        finalChoice
+      );
+
+
+      closeModal();
+
+
+      // Scroll to result
+
+      setTimeout(function() {
+
+        document.getElementById("result")
+          .scrollIntoView({
+            behavior: "smooth"
+          });
+
+      }, 100);
+
+    }
+
+
+    // RESET
+
+    function resetChoice() {
+
+      document.getElementById("result")
+        .classList.remove("show");
+
+      localStorage.removeItem("selectedFood");
+
+    }
+
+
+    // LOAD SAVED FOOD
+
+    window.onload = function() {
+
+      const savedFood =
+        localStorage.getItem("selectedFood");
+
+
+      if (savedFood) {
+
+        document.getElementById("selectedFood")
+          .textContent = savedFood;
+
+        document.getElementById("result")
+          .classList.add("show");
+
+      }
+
+    };
+
+
+    // CLOSE WHEN CLICK OUTSIDE
+
+    document.getElementById("foodModal")
+      .addEventListener("click", function(event) {
+
+        if (event.target === this) {
+
+          closeModal();
+
+        }
+
+      });
+
+  </script>
+  <script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./sw.js")
+        .then(() => console.log("App ready"))
+        .catch(error => console.log("Service Worker error:", error));
+    });
+  }
+</script>
+
+</body>
+</html>
