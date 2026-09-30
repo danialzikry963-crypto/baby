@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Notification Test</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px 20px;
+      background: #f8f5f7;
+    }
+
+    button {
+      border: none;
+      border-radius: 25px;
+      padding: 15px 25px;
+      background: #222;
+      color: white;
+      font-size: 16px;
+    }
+
+    #status {
+      margin-top: 25px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>🔔 Notification Test</h1>
+
+  <p>
+    Tekan button bawah untuk test notification.
+  </p>
+
+  <button onclick="testNotification()">
+    🔔 Test Notification
+  </button>
+
+  <div id="status">
+    Status: belum test
+  </div>
+
+
+  <script>
+
+    async function testNotification() {
+
+      const status =
+        document.getElementById("status");
+
+
+      if (!("Notification" in window)) {
+
+        status.innerText =
+          "❌ Notification API tak tersedia.";
+
+        return;
+      }
+
+
+      status.innerText =
+        "⏳ Meminta permission...";
+
+
+      const permission =
+        await Notification.requestPermission();
+
+
+      console.log(
+        "Permission:",
+        permission
+      );
+
+
+      if (permission === "granted") {
+
+        status.innerText =
+          "✅ Permission GRANTED!";
+
+
+        new Notification(
+          "🔔 Test Berjaya!",
+          {
+            body:
+              "iPhone dah benarkan notification."
+          }
+        );
+
+
+      } else if (permission === "denied") {
+
+        status.innerText =
+          "❌ Permission DENIED.";
+
+
+      } else {
+
+        status.innerText =
+          "⚠️ Permission masih DEFAULT.";
+
+      }
+
+    }
+
+  </script>
+
+</body>
+
+</html>
