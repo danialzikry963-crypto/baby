@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ms">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Danial Dashboard</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Sayang Space - Dashboard</title>
 
   <style>
     * {
@@ -13,14 +17,14 @@
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f7f5f8;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f8f5f7;
       color: #222;
       padding: 20px;
     }
 
     .container {
-      max-width: 600px;
+      max-width: 700px;
       margin: auto;
     }
 
@@ -31,355 +35,701 @@
 
     .subtitle {
       text-align: center;
-      color: #888;
-      margin-bottom: 25px;
+      color: #777;
+      margin-bottom: 15px;
+    }
+
+    .notify-btn {
+      display: block;
+      margin: 0 auto 25px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 25px;
+      background: #222;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .notify-btn:active {
+      transform: scale(0.97);
+    }
+
+    .section {
+      margin-top: 25px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
     }
 
     .card {
       background: white;
-      border-radius: 20px;
-      padding: 18px;
-      margin-bottom: 18px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+      border-radius: 18px;
+      padding: 15px;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
     }
 
-    .card h2 {
-      margin-top: 0;
-      font-size: 19px;
-    }
-
-    .item {
-      padding: 14px;
-      border-radius: 14px;
-      background: #fafafa;
-      margin-top: 10px;
+    .card-title {
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 5px;
     }
 
     .time {
       font-size: 12px;
       color: #999;
-      margin-top: 6px;
+      margin-top: 8px;
     }
 
     .empty {
       color: #999;
       font-size: 14px;
+      padding: 10px 0;
+    }
+
+    .message {
+      white-space: pre-wrap;
+      line-height: 1.5;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <h1>💗 Danial Dashboard</h1>
+  <h1>💗 Sayang Space</h1>
 
-    <div class="subtitle">
-      Sayang Space
-    </div>
-    <button onclick="enableNotifications()" style="
-  display:block;
-  margin:15px auto 25px;
-  padding:12px 20px;
-  border:none;
-  border-radius:20px;
-  background:#222;
-  color:white;
-  font-size:14px;
-">
-  🔔 Enable Notifications
-</button>
+  <div class="subtitle">
+    Dashboard
+  </div>
 
-    <!-- FOOD -->
-    <div class="card">
-      <h2>🍔 Makanan</h2>
+  <button
+    class="notify-btn"
+    onclick="enableNotifications()"
+  >
+    🔔 Enable Notifications
+  </button>
 
-      <div id="foodList">
-        <div class="empty">
-          Belum ada pilihan makanan.
-        </div>
-      </div>
+
+  <!-- ========================= -->
+  <!-- MAKANAN -->
+  <!-- ========================= -->
+
+  <div class="section">
+
+    <div class="section-title">
+      🍔 Makanan
     </div>
 
-    <!-- EMOTION -->
-    <div class="card">
-      <h2>💭 Emotion</h2>
-
-      <div id="emotionList">
-        <div class="empty">
-          Belum ada emotion.
-        </div>
-      </div>
-    </div>
-
-    <!-- FEELINGS -->
-    <div class="card">
-      <h2>💌 Luahan</h2>
-
-      <div id="feelingList">
-        <div class="empty">
-          Belum ada luahan.
-        </div>
+    <div id="foodList">
+      <div class="empty">
+        Belum ada pilihan makanan.
       </div>
     </div>
 
   </div>
 
-  <script type="module">
 
-    import { initializeApp }
-      from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+  <!-- ========================= -->
+  <!-- EMOTION -->
+  <!-- ========================= -->
 
-    import {
-      getDatabase,
-      ref,
-      onValue,
-      onChildAdded
+  <div class="section">
+
+    <div class="section-title">
+      💭 Emotion
+    </div>
+
+    <div id="emotionList">
+      <div class="empty">
+        Belum ada emotion.
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- LUAHAN -->
+  <!-- ========================= -->
+
+  <div class="section">
+
+    <div class="section-title">
+      💌 Luahan
+    </div>
+
+    <div id="feelingList">
+      <div class="empty">
+        Belum ada luahan.
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+<script type="module">
+
+  import {
+    initializeApp
+  } from
+  "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+
+  import {
+    getDatabase,
+    ref,
+    onValue,
+    onChildAdded
+  } from
+  "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+
+
+  /* ========================= */
+  /* FIREBASE */
+  /* ========================= */
+
+  const firebaseConfig = {
+
+    apiKey:
+      "AIzaSyDSFvZ3JtqTB7HP85WyRa5dka9VRUJdKDU",
+
+    authDomain:
+      "baby-7eec4.firebaseapp.com",
+
+    databaseURL:
+      "https://baby-7eec4-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+    projectId:
+      "baby-7eec4",
+
+    storageBucket:
+      "baby-7eec4.firebasestorage.app",
+
+    messagingSenderId:
+      "824621868036",
+
+    appId:
+      "1:824621868036:web:870a7c66e9311fb77ec151"
+  };
+
+
+  const app =
+    initializeApp(firebaseConfig);
+
+  const db =
+    getDatabase(app);
+
+
+  /* ========================= */
+  /* SERVICE WORKER */
+  /* ========================= */
+
+  let dashboardRegistration = null;
+
+  async function setupServiceWorker() {
+
+    if (!("serviceWorker" in navigator)) {
+      console.log(
+        "Service Worker tidak disokong."
+      );
+      return;
     }
-    from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+
+    try {
+
+      dashboardRegistration =
+        await navigator.serviceWorker.register(
+          "./firebase-messaging-sw.js"
+        );
+
+      console.log(
+        "✅ Firebase Messaging Service Worker ready"
+      );
+
+    } catch (error) {
+
+      console.error(
+        "❌ Service Worker error:",
+        error
+      );
+
+    }
+
+  }
 
 
-    // FIREBASE CONFIG
-    const firebaseConfig = {
+  setupServiceWorker();
 
-      apiKey:
-        "AIzaSyDSFvZ3JtqTB7HP85WyRa5dka9VRUJdKDU",
 
-      authDomain:
-        "baby-7eec4.firebaseapp.com",
+  /* ========================= */
+  /* NOTIFICATION PERMISSION */
+  /* ========================= */
 
-      databaseURL:
-        "https://baby-7eec4-default-rtdb.asia-southeast1.firebasedatabase.app",
+  window.enableNotifications =
+    async function() {
 
-      projectId:
-        "baby-7eec4",
+      if (!("Notification" in window)) {
 
-      storageBucket:
-        "baby-7eec4.firebasestorage.app",
+        alert(
+          "Browser/device ini tidak support notification."
+        );
 
-      messagingSenderId:
-        "824621868036",
+        return;
+      }
 
-      appId:
-        "1:824621868036:web:870a7c66e9311fb77ec151"
+
+      const permission =
+        await Notification.requestPermission();
+
+
+      if (permission === "granted") {
+
+        alert(
+          "🔔 Notification dah aktif!"
+        );
+
+        console.log(
+          "✅ Notification permission granted"
+        );
+
+      } else {
+
+        alert(
+          "Notification belum dibenarkan."
+        );
+
+      }
+
     };
 
 
-    const app = initializeApp(firebaseConfig);
+  /* ========================= */
+  /* SHOW NOTIFICATION */
+  /* ========================= */
 
-    const db = getDatabase(app);
-    // =========================
-// NOTIFICATION
-// =========================
+  async function showDashboardNotification(
+    title,
+    body
+  ) {
 
-let dashboardReady = false;
+    if (
+      !("Notification" in window) ||
+      Notification.permission !== "granted"
+    ) {
 
-async function enableNotifications() {
-  if (!("Notification" in window)) {
-    alert("Browser ni tak support notification.");
-    return;
-  }
+      console.log(
+        "Notification belum dibenarkan."
+      );
 
-  if (Notification.permission === "default") {
-    await Notification.requestPermission();
-  }
-}
-
-function showNotification(title, body) {
-  if (Notification.permission === "granted") {
-    new Notification(title, {
-      body: body
-    });
-  }
-}
+      return;
+    }
 
 
+    try {
 
-    // =========================
-    // FOOD
-    // =========================
+      if (!dashboardRegistration) {
 
-    const foodRef = ref(db, "foodChoices");
+        dashboardRegistration =
+          await navigator.serviceWorker.ready;
 
-    onValueonChildAdded(foodRef, (snapshot) => {
-
-  if (!dashboardReady) return;
-
-  const data = snapshot.val();
-
-  showNotification(
-    "🍔 Sayang Space",
-    `Dia pilih ${data.food || "makanan"} ❤️`
-  );
-
-});(foodRef, (snapshot) => {
-
-      const data = snapshot.val();
-
-      const list = document.getElementById("foodList");
-
-      list.innerHTML = "";
-
-      if (!data) {
-
-        list.innerHTML =
-          '<div class="empty">Belum ada pilihan makanan.</div>';
-
-        return;
       }
 
-      Object.values(data)
-        .reverse()
-        .forEach(item => {
 
-          const div = document.createElement("div");
+      await dashboardRegistration.showNotification(
+        title,
+        {
+          body: body,
 
-          div.className = "item";
+          icon:
+            "./icon-192.png",
 
-          div.innerHTML = `
-            <strong>${item.food || "Unknown"}</strong>
-            <div class="time">
-              ${formatTime(item.timestamp)}
-            </div>
-          `;
-
-          list.appendChild(div);
-
-        });
-
-    });
+          badge:
+            "./icon-192.png"
+        }
+      );
 
 
-    // =========================
-    // EMOTION
-    // =========================
-
-    const emotionRef = ref(db, "emotions");
-
-    onValue(emotionRef, (snapshot) => {
-
-      const data = snapshot.val();
-
-      const list =
-        document.getElementById("emotionList");
-
-      list.innerHTML = "";
-
-      if (!data) {
-
-        list.innerHTML =
-          '<div class="empty">Belum ada emotion.</div>';
-
-        return;
-      }
-
-      Object.values(data)
-        .reverse()
-        .forEach(item => {
-
-          const div = document.createElement("div");
-
-          div.className = "item";
-
-          div.innerHTML = `
-            <strong>
-              ${item.emotionName || item.emotion || "Unknown"}
-            </strong>
-
-            <div class="time">
-              ${formatTime(item.timestamp)}
-            </div>
-          `;
-
-          list.appendChild(div);
-
-        });
-
-    });
+      console.log(
+        "🔔 Notification sent:",
+        title
+      );
 
 
-    // =========================
-    // FEELINGS
-    // =========================
+    } catch (error) {
 
-    const feelingsRef = ref(db, "feelings");
-
-    onValue(feelingsRef, (snapshot) => {
-
-      const data = snapshot.val();
-
-      const list =
-        document.getElementById("feelingList");
-
-      list.innerHTML = "";
-
-      if (!data) {
-
-        list.innerHTML =
-          '<div class="empty">Belum ada luahan.</div>';
-
-        return;
-      }
-
-      Object.values(data)
-        .reverse()
-        .forEach(item => {
-
-          const div = document.createElement("div");
-
-          div.className = "item";
-
-          div.innerHTML = `
-
-            <strong>
-              ${item.emotionName || "Luahan"}
-            </strong>
-
-            <p>
-              ${item.message || ""}
-            </p>
-
-            <div class="time">
-              ${formatTime(item.timestamp)}
-            </div>
-
-          `;
-
-          list.appendChild(div);
-
-        });
-
-    });
-
-
-    // =========================
-    // TIME
-    // =========================
-
-    function formatTime(timestamp) {
-
-      if (!timestamp) {
-        return "Masa tidak tersedia";
-      }
-
-      const date = new Date(timestamp);
-
-      return date.toLocaleString("ms-MY", {
-        dateStyle: "medium",
-        timeStyle: "short"
-      });
+      console.error(
+        "❌ Notification failed:",
+        error
+      );
 
     }
-    // =========================
-// DASHBOARD READY
-// =========================
 
-setTimeout(() => {
-  dashboardReady = true;
-  console.log("✅ Dashboard notification ready");
-}, 2000);
+  }
 
-  </script>
+
+  /* ========================= */
+  /* DASHBOARD READY */
+  /* ========================= */
+
+  let dashboardReady = false;
+
+
+  /* ========================= */
+  /* FORMAT TIME */
+  /* ========================= */
+
+  function formatTime(timestamp) {
+
+    if (!timestamp) {
+
+      return "Masa tidak tersedia";
+
+    }
+
+
+    const date =
+      new Date(timestamp);
+
+
+    return date.toLocaleString(
+      "ms-MY",
+      {
+        dateStyle: "medium",
+        timeStyle: "short"
+      }
+    );
+
+  }
+
+
+  /* ========================= */
+  /* FOOD */
+  /* ========================= */
+
+  const foodRef =
+    ref(db, "foodChoices");
+
+
+  onValue(
+    foodRef,
+    snapshot => {
+
+      const list =
+        document.getElementById(
+          "foodList"
+        );
+
+
+      list.innerHTML = "";
+
+
+      if (!snapshot.exists()) {
+
+        list.innerHTML =
+          `<div class="empty">
+            Belum ada pilihan makanan.
+          </div>`;
+
+        return;
+      }
+
+
+      const data =
+        snapshot.val();
+
+
+      Object.entries(data)
+        .reverse()
+        .forEach(
+          ([id, item]) => {
+
+            const card =
+              document.createElement(
+                "div"
+              );
+
+            card.className =
+              "card";
+
+
+            card.innerHTML = `
+
+              <div class="card-title">
+                🍔 ${item.food || "Makanan"}
+              </div>
+
+              <div class="time">
+                ${formatTime(item.timestamp)}
+              </div>
+
+            `;
+
+
+            list.appendChild(card);
+
+          }
+        );
+
+    }
+  );
+
+
+  /* ========================= */
+  /* NEW FOOD NOTIFICATION */
+  /* ========================= */
+
+  onChildAdded(
+    foodRef,
+    snapshot => {
+
+      if (!dashboardReady) {
+        return;
+      }
+
+
+      const data =
+        snapshot.val();
+
+
+      showDashboardNotification(
+        "🍔 Sayang Space",
+        `Dia pilih ${data.food || "makanan"} ❤️`
+      );
+
+    }
+  );
+
+
+  /* ========================= */
+  /* EMOTION */
+  /* ========================= */
+
+  const emotionRef =
+    ref(db, "emotions");
+
+
+  onValue(
+    emotionRef,
+    snapshot => {
+
+      const list =
+        document.getElementById(
+          "emotionList"
+        );
+
+
+      list.innerHTML = "";
+
+
+      if (!snapshot.exists()) {
+
+        list.innerHTML =
+          `<div class="empty">
+            Belum ada emotion.
+          </div>`;
+
+        return;
+      }
+
+
+      const data =
+        snapshot.val();
+
+
+      Object.entries(data)
+        .reverse()
+        .forEach(
+          ([id, item]) => {
+
+            const card =
+              document.createElement(
+                "div"
+              );
+
+
+            card.className =
+              "card";
+
+
+            card.innerHTML = `
+
+              <div class="card-title">
+                💭 ${item.emotionName || "Emotion"}
+              </div>
+
+              <div class="time">
+                ${formatTime(item.timestamp)}
+              </div>
+
+            `;
+
+
+            list.appendChild(card);
+
+          }
+        );
+
+    }
+  );
+
+
+  /* ========================= */
+  /* NEW EMOTION NOTIFICATION */
+  /* ========================= */
+
+  onChildAdded(
+    emotionRef,
+    snapshot => {
+
+      if (!dashboardReady) {
+        return;
+      }
+
+
+      const data =
+        snapshot.val();
+
+
+      showDashboardNotification(
+        "💭 Emotion",
+        `Dia rasa ${data.emotionName || "sesuatu"} 🤍`
+      );
+
+    }
+  );
+
+
+  /* ========================= */
+  /* FEELINGS */
+  /* ========================= */
+
+  const feelingRef =
+    ref(db, "feelings");
+
+
+  onValue(
+    feelingRef,
+    snapshot => {
+
+      const list =
+        document.getElementById(
+          "feelingList"
+        );
+
+
+      list.innerHTML = "";
+
+
+      if (!snapshot.exists()) {
+
+        list.innerHTML =
+          `<div class="empty">
+            Belum ada luahan.
+          </div>`;
+
+        return;
+      }
+
+
+      const data =
+        snapshot.val();
+
+
+      Object.entries(data)
+        .reverse()
+        .forEach(
+          ([id, item]) => {
+
+            const card =
+              document.createElement(
+                "div"
+              );
+
+
+            card.className =
+              "card";
+
+
+            card.innerHTML = `
+
+              <div class="card-title">
+                💌 ${item.emotionName || "Luahan"}
+              </div>
+
+              <div class="message">
+                ${item.message || ""}
+              </div>
+
+              <div class="time">
+                ${formatTime(item.timestamp)}
+              </div>
+
+            `;
+
+
+            list.appendChild(card);
+
+          }
+        );
+
+    }
+  );
+
+
+  /* ========================= */
+  /* NEW FEELING NOTIFICATION */
+  /* ========================= */
+
+  onChildAdded(
+    feelingRef,
+    snapshot => {
+
+      if (!dashboardReady) {
+        return;
+      }
+
+
+      const data =
+        snapshot.val();
+
+
+      showDashboardNotification(
+        "💌 Ada luahan baru",
+        data.message ||
+        "Dia baru meluah sesuatu 🤍"
+      );
+
+    }
+  );
+
+
+  /* ========================= */
+  /* WAIT FOR INITIAL DATA */
+  /* ========================= */
+
+  setTimeout(
+    () => {
+
+      dashboardReady = true;
+
+      console.log(
+        "✅ Dashboard notification ready"
+      );
+
+    },
+    2000
+  );
+
+
+</script>
 
 </body>
 </html>
